@@ -9,5 +9,8 @@ wheels/
 # Virtual environments
 .venv
 
-# Raw data (large, course rules: never modify data/raw/)
-data/raw/
+# Data (never committed: raw, derived, human-labeled)
+data/
+
+# Secrets
+.env
