@@ -1,44 +1,36 @@
 # AGENTS.md — Business Analytics project: my-analysis
 
-Starter rules (from the course project brief):
+Read `plan.md` first. Never change it without asking Sofia.
 
-1. Never modify anything in `data/raw/`.
-2. After every filter, merge or drop, print the number of rows and the reason.
-3. Every number in a write-up comes from a file in `results/`; name the script that made it.
-4. Follow `plan.md`. Ask before changing anything in it, and list every analysis choice you make.
-5. Fix random seeds, and log the prompt, output and model name of every model call.
-6. No causal claims unless the design supports them. Say "I am not sure" when you are not.
+## Data and privacy
 
-## Methodological governance
+1. Never modify or write to `data/raw/`. Everything you make goes in `data/derived/`.
+2. Before reading anything else, drop `ProfileName` and replace `UserId` with a hash. Work only from that cleaned copy.
+3. Text sent to a hosted model must be screened for personal information first. Use only the models allowed in the course brief.
+4. Never commit or push `data/`, human-labeled files, or `.env`. Check `.gitignore` before every commit.
 
-7. **Do not change the research question, hypotheses, unit of analysis, or statistical methodology defined in `plan.md` without explicit approval.** Clearly distinguish confirmatory analyses from exploratory analyses in all outputs. Exploratory findings may not be promoted to confirmatory status after results have been seen.
+## Method
 
-## Data integrity & privacy
+5. Do not change the research question, hypotheses, unit of analysis or methods in `plan.md` without Sofia's approval. Label every output "confirmatory" or "exploratory"; exploratory results never become confirmatory.
+6. Cleaning rules need approval before they are applied. After every filter, merge or drop, print rows before → after → removed, and the reason.
+7. Fix random seeds. List every analysis choice made, including ones Sofia did not ask about.
+8. No causal claims unless the design supports them. Say "I am not sure" when not sure.
 
-8. `data/raw/` is read-only; no script may ever write to it.
-9. Every filter, merge, or drop prints rows before → rows after → rows removed → one-line reason. Proposed cleaning rules are submitted for approval before being applied, never executed silently.
-10. **Privacy:** review text can contain personally identifying information (names, locations, health details). Text sent to any hosted AI model must be screened/redacted for PII first. Human labeling and hand-verification are performed on local copies only.
+9. Label every statement as an observation, an assumption or a recommendation.
+10. After each data report, list three claims that can be checked by hand, and how.
 
-## AI labeling hygiene
+## AI labeling
 
-11. **The numerical `Score` is never exposed** to the AI model during aspect identification or sentiment classification; labels are built from review `Text` alone.
-12. Review `Summary` is treated with care: it often pre-reveals the rating's direction and must not be used as model input in the main labeling pass if it would leak rating information.
-13. **Attribute codebook freeze:** the codebook is fixed (and dated) before any statistical examination of its relationship with ratings. Afterwards, no change to codes, categories, or definitions without explicit approval, logged with date and rationale.
-14. Every AI call is logged: date, model name and version, exact prompt, input row ids, and raw output.
+11. Never show `Score` to a model that labels text. Labels come from `Text` only; `Summary` is not model input in the main pass.
+12. The codebook is frozen and dated before any analysis of its relation with `Score`. Later changes need approval, logged with date and reason.
+13. The 200 human-labeled items are chosen reproducibly, stored apart from AI output, and labeled from `Text` only. Never open AI labels for them until Sofia says the labeling is done.
 
-## Human validation (course requirement)
+## Traceability
 
-15. **200 items must be manually labeled by the analyst before seeing any AI-generated labels.** The 200 items are selected in a logged, reproducible way and stored separately from AI outputs to avoid incidental exposure. Human–AI agreement is then computed and reported; disagreements are documented, not silently corrected.
+14. Every number in a write-up comes from a file in `results/`; name the script that made it. Each table or figure comes from one script in `src/`, numbered in run order.
+15. For every model call and every output produced, log: date, model name and version, exact prompt, input row ids, raw output.
 
-## Verification & attribution
+## Mistakes and version control
 
-16. At least three factual claims about the data are independently hand-verified per session and recorded with date.
-17. Every stated observation, recommendation, or assumption is explicitly labeled as such.
-
-## Mistakes
-
-18. Errors, changed decisions, and abandoned approaches are recorded in `mistakes.md` with what happened, when, impact, and fix — no silent backtracking.
-
-## Version control
-
-19. Every time a file is modified and the change is approved, the change is committed and pushed to the remote repository (`origin`) — not just saved locally. Commit messages state what changed and why.
+16. Record errors, changed decisions and abandoned approaches in `mistakes.md`: what happened, when, impact, fix. No silent backtracking.
+17. Commit approved changes to code and text files with a message saying what and why; push only when Sofia asks.
