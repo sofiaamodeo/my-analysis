@@ -23,3 +23,5 @@ calls/
 │   ├── model.md
 │   └── output.md
 6. No causal claims unless the design supports them. Say "I am not sure" when you are not.
+7. Drop or replace names, emails, IDs, phone numbers columns before reading anything else.
+
