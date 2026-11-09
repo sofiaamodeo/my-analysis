@@ -10,10 +10,31 @@ I therefore expect encounters with number_inpatient >= 1 to have a higher
 recorded '<30' rate than encounters with number_inpatient = 0.
 This explanation is a hypothesis; an association would not establish causality.
 
+## Current stage (set 2026-11-09)
+
+The current stage is descriptive exploration (EDA) only. No data cleaning,
+hypothesis testing, predictive modelling, or train/validation/test splitting
+is performed yet. Later inference and predictive-modelling stages are
+described below and require Sofia explicitly opening them.
+
+Patient-level checks (distinct patients, encounters per patient, repeated
+identifiers) require local processing that keeps identifiers outside the
+agent's model context: the hosted agent prepares the scripts, Sofia runs them
+locally, and only aggregate outputs are shared back.
+
+Removing direct identifiers alone does not establish complete anonymity;
+datasets like this can still be re-identified when age, race, and gender
+remain. Treat the identifier-free export as reduced-circulation working data,
+not as fully anonymous data.
+
 ## Data and unit
 Use the supplied diabetes hospital encounters CSV and its documentation.
 The primary unit is an encounter. Preserve patient grouping for uncertainty
-estimation and train/test splitting. Do not use IDs as model predictors.
+estimation and train/test splitting; this is retained as a future requirement
+that needs an agreed local procedure, because patient identifiers must stay
+outside the hosted agent's context. Encounters are not treated as independent
+and encounter-level random splitting is not an acceptable substitute.
+Do not use IDs as model predictors.
 Record the actual filename, dimensions, and documentation after inspection.
 
 ## Outcome and cohort
@@ -60,8 +81,10 @@ Run the main analysis once step by step and once in a fresh autonomous run
 under the same agreed specification. Compare choices and results.
 Use a fresh critic session to audit the scripts and conclusions.
 An auditor's criticism is a claim to verify, not proof of an error.
-Log confirmed mistakes, how they were detected, corrections, and remaining
-limitations in mistakes.md. Do not invent mistakes to fill the log.
+mistakes.md is maintained exclusively by Sofia; no agent may create, edit,
+overwrite, or append to it. Suspected errors are reported in the conversation;
+Sofia records confirmed mistakes there herself, with how they were detected,
+corrections, and remaining limitations. Do not invent mistakes to fill the log.
 
 ## Verification
 Manually check three claims from the first report using the original CSV:
