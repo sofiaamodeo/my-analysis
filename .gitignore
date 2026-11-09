@@ -10,7 +10,9 @@ wheels/
 .venv
 
 # Data (never committed: raw, derived, human-labeled)
-data/
+# The data dictionary (data/README.md) stays tracked:
+data/*
+!data/README.md
 
 # Secrets
 .env
