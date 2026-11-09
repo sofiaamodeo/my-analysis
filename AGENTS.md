@@ -6,10 +6,11 @@ Starter rules (from the course project brief):
 2. After every filter, merge or drop, print the number of rows and the reason.
 3. Every number in a write-up comes from a file in `results/`; name the script that made it.
 4. Follow `plan.md`. Ask before changing anything in it, and list every analysis choice you make.
-5. Fix random seeds, and log the prompt, output and model name of of every
-   assistant turn in folder `calls/` — including every conversation turn
-   (questions, clarifications, data operations), not only analysis steps.
-   Log each turn BEFORE responding to the next request and never skip one. Its structure should be
+5. Fix random seeds. Log in `calls/` every Build-mode turn that executes
+   or defines analysis work (scripts, data preparation, reports).
+   Do not log Plan-mode discussion, git pushes, or one-off clarifications.
+   Log each qualifying turn BEFORE responding to the next request.
+   Its structure should be
 calls/
 ├── call_001_initial_exploration/
 │   ├── prompt.md
