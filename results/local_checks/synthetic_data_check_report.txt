@@ -1,0 +1,23 @@
+Synthetic-data check report (no real data accessed)
+Executed with a synthetic temporary CSV generated inside this run
+
+- [PASS] A1. Only encounter_id/patient_nbr removed (columns and order kept) (25 columns retained)
+- [PASS] A2. Row count preserved (6 rows)
+- [PASS] A3. Encounter order preserved (time_in_hospital sequence kept) (order matched)
+- [PASS] A4. Literal '?', literal 'None', empty cells, comma field, ICD codes preserved (special/empty/quoted cells identical)
+- [PASS] A5. No identifier values leak into the saved export (0 fake IDs found in the exported file text)
+- [PASS] A6. Script's own saved-output validation is all PASS (4/4 script self-checks PASS)
+- [PASS] A7. Export never silently overwrites an existing file (second run produced a separate timestamped file)
+- [PASS] B1. Patient-level aggregate correct: total_rows == 6 (got 6)
+- [PASS] B1. Patient-level aggregate correct: missing_encounter_rows == 1 (got 1)
+- [PASS] B1. Patient-level aggregate correct: missing_patient_rows == 1 (got 1)
+- [PASS] B1. Patient-level aggregate correct: distinct_valid_patients == 4 (got 4)
+- [PASS] B1. Patient-level aggregate correct: patients_multiple_encounters == 1 (got 1)
+- [PASS] B1. Patient-level aggregate correct: repeated_encounter_ids == 1 (got 1)
+- [PASS] B1. Patient-level aggregate correct: rows_sharing_repeated_id == 2 (got 2)
+- [PASS] B1. Patient-level aggregate correct: rows_fully_duplicated == 0 (got 0)
+- [PASS] B1. Patient-level aggregate correct: full_dup_groups == 0 (got 0)
+- [PASS] B2. Encounter-per-patient distribution correct (got {1: 3, 2: 1})
+- [PASS] C1. No identifier values appear in captured script output (0 fake IDs found in captured stdout)
+
+ALL SYNTHETIC CHECKS PASSED: 18/18 checks passed.
